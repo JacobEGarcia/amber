@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>amber - your companion</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:100%; height:100%; overflow:hidden; background:#0b0810; font-family:'Segoe UI',system-ui,-apple-system,sans-serif; }
+  #scene { position:fixed; inset:0; }
+  #loading { position:fixed; inset:0; background:#0b0810; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:50; transition:opacity .6s; color:#ffb35c; }
+  #loading .ring { width:46px; height:46px; border:3px solid rgba(255,179,92,.15); border-top-color:#ffb35c; border-radius:50%; animation:spin 1s linear infinite; margin-bottom:18px; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  #hud { position:fixed; top:18px; left:20px; z-index:10; color:#f5e9dc; pointer-events:none; }
+  #hud h1 { font-size:22px; font-weight:600; letter-spacing:2px; color:#ffb35c; text-shadow:0 0 18px rgba(255,150,40,.45); }
+  #hud p { font-size:11px; opacity:.55; letter-spacing:1px; margin-top:2px; }
+  #affection { position:fixed; top:20px; right:22px; z-index:10; text-align:right; pointer-events:none; }
+  #hearts { font-size:17px; letter-spacing:2px; }
+  #affLabel { font-size:10px; color:#ffb35c; opacity:.8; letter-spacing:1px; margin-top:3px; text-transform:uppercase; }
+  #bubble { position:fixed; z-index:20; max-width:250px; background:rgba(20,14,26,.92); border:1px solid rgba(255,179,92,.4); color:#ffe9d2; padding:10px 14px; border-radius:14px; font-size:14px; line-height:1.35; opacity:0; transform:translate(-50%,-110%) scale(.9); transition:opacity .25s, transform .25s; pointer-events:none; box-shadow:0 4px 24px rgba(0,0,0,.5); }
+  #bubble.show { opacity:1; transform:translate(-50%,-115%) scale(1); }
+  #bubble:after { content:''; position:absolute; left:50%; bottom:-7px; transform:translateX(-50%); border:7px solid transparent; border-top-color:rgba(255,179,92,.4); border-bottom:0; }
+  #chatbar { position:fixed; bottom:0; left:0; right:0; z-index:15; display:flex; gap:10px; padding:14px 16px calc(14px + env(safe-area-inset-bottom)); background:linear-gradient(transparent, rgba(8,5,12,.88) 40%); }
+  #msg { flex:1; background:rgba(26,19,34,.9); border:1px solid rgba(255,179,92,.3); border-radius:24px; padding:12px 18px; color:#ffe9d2; font-size:15px; outline:none; }
+  #msg::placeholder { color:rgba(255,233,210,.35); }
+  #msg:focus { border-color:rgba(255,179,92,.7); box-shadow:0 0 20px rgba(255,150,40,.15); }
+  #send { background:linear-gradient(135deg,#ff9a2e,#ff6a00); border:none; border-radius:24px; padding:12px 22px; color:#1a0e00; font-weight:700; font-size:15px; cursor:pointer; }
+  #send:active { transform:scale(.96); }
+  #hint { position:fixed; bottom:78px; left:0; right:0; text-align:center; z-index:9; color:rgba(255,233,210,.4); font-size:12px; letter-spacing:1px; pointer-events:none; transition:opacity 1s; }
+</style>
+</head>
+<body>
+<div id="scene"></div>
+<div id="loading"><div class="ring"></div><div>waking amber up...</div></div>
+<div id="hud"><h1>AMBER</h1><p>an original companion &middot; inspired by ani</p></div>
+<div id="affection"><div id="hearts"></div><div id="affLabel">affection</div></div>
+<div id="bubble"></div>
+<div id="hint">click her &middot; say hi</div>
+<div id="chatbar">
+  <input id="msg" type="text" placeholder="talk to amber..." autocomplete="off" maxlength="200">
+  <button id="send">send</button>
+</div>
+<script type="module" src="./main.js"></script>
+</body>
+</html>
